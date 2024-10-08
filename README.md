@@ -1,2 +1,2 @@
-# estudio-fotografico-django
-Sistema de gerenciamento de fotógrafos equipamentos e eventos
+	O sistema JPG-Studio é um sistema que visa gerenciar uma empresa voltada no ramo da fotografia.
+    Gerenciando devidamente os eventos que a empresa possui e categorizando-os por tipo, além de mostrar os funcionários disponíveis, suas especialidades, e quais equipamentos utilizam.
