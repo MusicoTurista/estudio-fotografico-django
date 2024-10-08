@@ -9,9 +9,9 @@ def get_file_path(_instance, filename):
     return filename
 
 class Fotografo(models.Model):
-    cpf = models.IntegerField(_('CPF'), max_length=11)
+    cpf = models.IntegerField(_('CPF'), null=False)
     telefone = models.IntegerField(_('Telefone'), max_length=15)
-    nome = models.CharField(_('Nome'), max_length=100)
+    nome = models.CharField(_('Nome'), max_length=100, null=False)
     sexo = models.CharField(_('Sexo'), max_length=20)
     imagem = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 260, 'crop': True}})
     class Meta:
