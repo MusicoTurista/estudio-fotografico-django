@@ -95,8 +95,8 @@ class Evento(models.Model):
         ('Tempo de serviço', _('Tempo de serviço')),
     )
     cliente = models.ForeignKey(Cliente, related_name='Cliente', on_delete=models.CASCADE)
-    categoria = models.ForeignKey(CategoriaEvento, related_name='Categoria', on_delete=models.RESTRICT)
     data = models.DateTimeField('Data/Hora', blank=True, null=False)
+    categoria = models.ForeignKey(CategoriaEvento, related_name='Categoria', on_delete=models.RESTRICT)
     pacote_tipo = models.CharField(_('Pacote'), blank=True, null=False, choices=Pacotes)
     fotografos = models.ManyToManyField(Fotografo)
 
@@ -108,6 +108,16 @@ class Evento(models.Model):
         return f'{self.cliente} - {self.data}'
 
 
+class Entrega(models.Model):
+    evento = models.ForeignKey(Evento, related_name='Evento', on_delete=models.CASCADE)
+    data = models.DateField('Data da entrega', blank=True, null=False)
+    class Meta:
+        verbose_name = _('Entrega')
+        verbose_name_plural = _('Entregas')
+
+    def __str__(self):
+        return f'{self.evento} - {self.data}'
+
 class Foto(models.Model):
     Entregas = (
         ('Digital', _('Digital')),
@@ -118,19 +128,10 @@ class Foto(models.Model):
     )
     imagem = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path)
     entrega_tipo = models.CharField(_('Tipo de entrega'), blank=True, null=False, choices=Entregas)
-    data_entrega = models.DateField('Data', blank=True, null=False)
+    entrega = models.ForeignKey(Entrega, related_name='Entrega', on_delete=models.CASCADE)
     class Meta:
         verbose_name = _('Foto')
         verbose_name_plural = _('Fotos')
 
     def __str__(self):
-        return f'{self.entrega_tipo} - {self.data_entrega}'
-
-class Entrega(models.Model):
-    evento = models.ForeignKey(Evento, related_name='Evento', on_delete=models.CASCADE)
-    class Meta:
-        verbose_name = _('Entrega')
-        verbose_name_plural = _('Entregas')
-
-    def __str__(self):
-        return self.evento
+        return f'{self.entrega_tipo}'
