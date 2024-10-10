@@ -6,6 +6,9 @@ from .models import *
 class EquipamentoInLine(admin.TabularInline):
     model = Equipamento
 
+class FotoInLine(admin.TabularInline):
+    model = Foto
+
 @admin.register(Departamento)
 class DepartamentoAdmin(admin.ModelAdmin):
     list_display = ('tipo', 'descricao')
@@ -30,5 +33,9 @@ class CategoriaEventoAdmin(admin.ModelAdmin):
     list_display = ('tipo', 'descricao')
 
 @admin.register(Evento)
-class CategoriaEventoAdmin(admin.ModelAdmin):
+class EventoAdmin(admin.ModelAdmin):
     list_display = ('cliente', 'data')
+
+@admin.register(Entrega)
+class CategoriaEventoAdmin(admin.ModelAdmin):
+    list_display = ('evento')
