@@ -39,3 +39,6 @@ class EventoAdmin(admin.ModelAdmin):
 @admin.register(Entrega)
 class CategoriaEventoAdmin(admin.ModelAdmin):
     list_display = ('evento')
+    inlines = [
+        FotoInLine
+    ]
