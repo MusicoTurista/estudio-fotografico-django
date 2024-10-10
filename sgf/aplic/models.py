@@ -105,4 +105,4 @@ class Evento(models.Model):
         verbose_name_plural = _('Eventos')
 
     def __str__(self):
-        return f'{self.cliente} {self.data}'
+        return f'{self.cliente} - {self.data}'

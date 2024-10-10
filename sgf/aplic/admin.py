@@ -31,4 +31,4 @@ class CategoriaEventoAdmin(admin.ModelAdmin):
 
 @admin.register(Evento)
 class CategoriaEventoAdmin(admin.ModelAdmin):
-    list_display = ('categoria', 'data')
+    list_display = ('cliente', 'data')
