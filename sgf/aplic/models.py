@@ -26,6 +26,20 @@ class Fotografo(models.Model):
     def __str__(self):
         return self.nome
 
+class Cliente(models.Model):
+
+    nome = models.CharField(_('Nome'), max_length=100, null=False)
+    cpf = models.CharField(_('CPF'), max_length=14, null=False)
+    telefone = models.CharField(_('Telefone'), max_length=14)
+    email = models.CharField(_('Email'), max_length=50, null=False)
+
+    class Meta:
+        verbose_name = _('Cliente')
+        verbose_name_plural = _('Clientes')
+
+    def __str__(self):
+        return self.nome
+
 class Equipamento(models.Model):
     Tipos = (
         ('Camera', _('Camera')),
@@ -80,10 +94,10 @@ class Evento(models.Model):
         ('Quantidade de fotos', _('Quantidade de fotos')),
         ('Tempo de serviço', _('Tempo de serviço')),
     )
-    nome = models.CharField(_('Nome'), max_length=100, null=False)
+    cliente = models.ForeignKey(Cliente, related_name='Cliente', on_delete=models.CASCADE)
     categoria = models.ForeignKey(CategoriaEvento, related_name='Categoria', on_delete=models.RESTRICT)
     data = models.DateTimeField('Data/Hora', blank=True, null=False)
-    pacote = models.CharField(_('Pacote'), blank=True, null=False, choices=Pacotes)
+    pacote_tipo = models.CharField(_('Pacote'), blank=True, null=False, choices=Pacotes)
     fotografos = models.ManyToManyField(Fotografo)
 
     class Meta:
@@ -91,4 +105,4 @@ class Evento(models.Model):
         verbose_name_plural = _('Eventos')
 
     def __str__(self):
-        return f'{self.categoria} {self.data}'
+        return f'{self.cliente} {self.data}'
