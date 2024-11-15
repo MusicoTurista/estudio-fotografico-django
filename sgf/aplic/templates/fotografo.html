@@ -1,0 +1,25 @@
+{% extends 'base.html'  %}
+
+{% block content %}
+
+
+<div class="container">
+<!-- Listagem de Fotografos -->
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+    {% for fotografo in fotografos %}
+       <div class="card" style="width: 18rem;">
+          <img src="{{ fotografo.imagem.url }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{fotografo.nome}}</h5>
+            <p class="card-text">
+                {{fotografo.telefone}}
+            </p>
+          </div>
+        </div>
+    {% endfor %}
+
+      </div>
+</div>
+
+{% endblock %}

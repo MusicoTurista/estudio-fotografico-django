@@ -1,0 +1,30 @@
+{% load static %}
+{% load bootstrap5 %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Studio JPG</title>
+     {% bootstrap_css %}
+</head>
+
+<body class="d-flex flex-column h-100">
+<header>
+<!--     aqui eu tenho que injetar o meu navbar       -->
+    {% include 'navbar.html' %}
+</header>
+
+<main>
+<!--    Injetar qualquer página que eu clicar -->
+    {% block content %} {% endblock %}
+</main>
+
+<!--    Injetar footer aqui -->
+    {% include 'footer.html' %}
+
+    {% bootstrap_javascript %}
+</body>
+</html>
