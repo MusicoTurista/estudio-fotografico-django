@@ -1,6 +1,7 @@
 from django.db import models
 from stdimage.models import StdImageField
 from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import User
 import uuid
 
 def get_file_path(_instance, filename):
@@ -94,7 +95,7 @@ class Evento(models.Model):
         ('Quantidade de fotos', _('Quantidade de fotos')),
         ('Tempo de serviço', _('Tempo de serviço')),
     )
-    cliente = models.ForeignKey(Cliente, related_name='Cliente', on_delete=models.CASCADE)
+    cliente = models.ForeignKey(User, related_name='Cliente', on_delete=models.CASCADE)
     data = models.DateTimeField('Data/Hora', blank=True, null=False)
     categoria = models.ForeignKey(CategoriaEvento, related_name='Categoria', on_delete=models.RESTRICT)
     pacote_tipo = models.CharField(_('Pacote'), blank=True, null=False, choices=Pacotes)

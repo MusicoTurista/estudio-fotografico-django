@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import *
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from .forms import *
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
 
 from django.contrib import messages
@@ -39,13 +40,13 @@ class EventoDetalheView(TemplateView):
 
 def RegisterView(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            #form.save()
+            form.save()
             messages.success(request, "Registrado com sucesso.")
             return redirect('/users/login')
     else:
-        form = UserCreationForm()
+        form = UserRegistrationForm()
     return render(request,"users/register.html",{'form':form})
 
 def LoginView(request):
@@ -57,12 +58,12 @@ def LoginView(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.success(request, f"Welcome back, {username}!")
+                messages.success(request, f"Bem vindo, {username}!")
                 return redirect('/')
             else:
-                messages.error(request, "Invalid username or password.")
+                messages.warning(request, "Username ou senha invalidos.")
         else:
-            messages.error(request, "Invalid username or password.")
+            messages.warning(request, "Username ou senha invalidos.")
     else:
         form = AuthenticationForm()
     return render(request, 'users/login.html', {'form': form})
