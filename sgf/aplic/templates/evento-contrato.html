@@ -6,13 +6,41 @@
     <header>
         <div class="pricing-header p-3 pb-md-4 mx-auto text-left">
             {% if user.is_authenticated %}
+                <h1 class="display-4 fw-normal">{{evento.tipo}}</h1>
                 {% if tipo == "pacotefoto" %}
-                    <h1 class="display-4 fw-normal">{{evento.tipo}}</h1>
                     <small class="fs-3 text-muted fw-light">R${{evento.valor_foto}}/Foto</small>
                 {% elif tipo == "pacotehora" %}
-                    <h1 class="display-4 fw-normal">{{evento.tipo}}</h1>
                     <small class="fs-3 text-muted fw-light">R${{evento.valor_hora}}/Hora</small>
                 {% endif %}
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h3 class="text-center">Data do Evento</h3>
+                                </div>
+                                <form class="card-body">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {% for campo in form %}
+                                            <div class="mb-3">
+                                                <label for="{{ campo.id_for_label }}" class="form-label">
+                                                    {{ campo.label }}: {{campo}}
+                                                </label>
+                                                <div class="mb-3">
+                                                    <small id="{{ campo.id_for_label }}" class="form-text text-muted">{{campo.help_text}}</small>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="d-grid">
+                                            <button type="submit" class="btn btn-primary">Requisitar Evento</button>
+                                        </div>
+                                    </form>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             {% else %}
                 <h1 class="text-center-secondary"><a href="/users/login" class="text-reset">Faça login </a> para continuar.</h1>
             {% endif %}

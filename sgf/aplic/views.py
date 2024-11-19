@@ -47,7 +47,13 @@ class EventoContratoView(TemplateView):
         if tipo == 'pacotefoto' or tipo == 'pacotehora':
             context['evento'] = CategoriaEvento.objects.filter(id=id).first
             context['tipo'] = tipo
+            context['form'] = EventRegistrationForm()
             return context
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+
 
 def RegisterView(request):
     if request.method == "POST":
