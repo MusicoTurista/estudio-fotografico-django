@@ -18,6 +18,11 @@
                     <a class="nav-link" aria-current="page" href="/evento">Eventos</a>
                 </li>
             </ul>
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-primary" href="/users/logout" role="button">Logout</a>
+            {% else %}
+                <a class="btn btn-outline-primary" href="/users/login" role="button">Fazer login</a>
+            {% endif %}
         </div>
     </div>
 </nav>

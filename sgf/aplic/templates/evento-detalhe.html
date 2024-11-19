@@ -18,9 +18,12 @@
                         <h4 class="my-0 fw-normal">Pacote por fotos</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{evento.valor_foto}}<small
-                                class="text-muted fw-light">/Foto</small></h1>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                        <h1 class="card-title pricing-card-title">{{evento.valor_foto}}<small class="text-muted fw-light">/Foto</small></h1>
+                        {% if user.is_authenticated %}
+                            <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                        {% else %}
+                            <a type="button" class="w-100 btn btn-lg btn-outline-dark" href="/users/login">Logar</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -30,9 +33,12 @@
                         <h4 class="my-0 fw-normal">Pacote por horas</h4>
                     </div>
                     <div class="card-body">
-                        <h1 class="card-title pricing-card-title">{{evento.valor_hora}}<small
-                                class="text-muted fw-light">/H</small></h1>
-                        <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                        <h1 class="card-title pricing-card-title">{{evento.valor_hora}}<small class="text-muted fw-light">/H</small></h1>
+                        {% if user.is_authenticated %}
+                            <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                        {% else %}
+                            <a type="button" class="w-100 btn btn-lg btn-outline-dark" href="/users/login">Logar</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
