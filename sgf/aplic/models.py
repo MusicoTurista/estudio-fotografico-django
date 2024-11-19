@@ -18,7 +18,7 @@ class Fotografo(models.Model):
     telefone = models.CharField(_('Telefone'), max_length=14)
     nome = models.CharField(_('Nome'), max_length=100, null=False)
     sexo = models.CharField(_('Sexo'), blank=True, null=False, choices=Sexos)
-    imagem = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 260, 'crop': True}})
+    imagem = StdImageField(_('Foto'), null=True, blank=True, upload_to=get_file_path, variations={'thumb': {'width': 420, 'height': 420, 'crop': True}})
     class Meta:
         verbose_name = _('Fotografo')
         verbose_name_plural = _('Fotografos')
