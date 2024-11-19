@@ -17,3 +17,18 @@ class FotografoView(TemplateView):
         context = super(FotografoView, self).get_context_data(**kwargs)
         context['fotografos'] = Fotografo.objects.order_by('-nome').all()
         return context
+
+class EventoView(TemplateView):
+    template_name = 'evento.html'
+    def get_context_data(self, **kwargs):
+        context = super(EventoView, self).get_context_data(**kwargs)
+        context['eventos'] = CategoriaEvento.objects.order_by('-tipo').all()
+        return context
+
+class EventoDetalheView(TemplateView):
+    template_name = 'evento-detalhe.html'
+    def get_context_data(self, **kwargs):
+        context = super(EventoDetalheView, self).get_context_data(**kwargs)
+        id = self.kwargs['id']
+        context['evento'] = CategoriaEvento.objects.filter(id=id).first
+        return context

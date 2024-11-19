@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+        <!-- Listagem de Fotografos -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-md-4 g-3">
+
+            {% for evento in eventos %}
+            <div class="col">
+                <div class="card shadow-sm" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{evento.tipo}}</h5>
+                        <p class="card-text">
+                            {{evento.descricao}}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/evento-detalhe/{{evento.id}}" class="btn btn-sm btn btn-outline-dark">Saiba mais</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
