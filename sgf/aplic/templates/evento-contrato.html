@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-3">
+    <header>
+        <div class="pricing-header p-3 pb-md-4 mx-auto text-left">
+            {% if user.is_authenticated %}
+                {% if tipo == "pacotefoto" %}
+                    <h1 class="display-4 fw-normal">{{evento.tipo}}</h1>
+                    <small class="fs-3 text-muted fw-light">R${{evento.valor_foto}}/Foto</small>
+                {% elif tipo == "pacotehora" %}
+                    <h1 class="display-4 fw-normal">{{evento.tipo}}</h1>
+                    <small class="fs-3 text-muted fw-light">R${{evento.valor_hora}}/Hora</small>
+                {% endif %}
+            {% else %}
+                <h1 class="text-center-secondary"><a href="/users/login" class="text-reset">Faça login </a> para continuar.</h1>
+            {% endif %}
+        </div>
+    </header>
+</div>
+
+{% endblock %}

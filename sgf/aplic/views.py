@@ -38,6 +38,17 @@ class EventoDetalheView(TemplateView):
         context['evento'] = CategoriaEvento.objects.filter(id=id).first
         return context
 
+class EventoContratoView(TemplateView):
+    template_name = 'evento-contrato.html'
+    def get_context_data(self, **kwargs):
+        context = super(EventoContratoView, self).get_context_data(**kwargs)
+        id = self.kwargs['id']
+        tipo = self.kwargs['tipo']
+        if tipo == 'pacotefoto' or tipo == 'pacotehora':
+            context['evento'] = CategoriaEvento.objects.filter(id=id).first
+            context['tipo'] = tipo
+            return context
+
 def RegisterView(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)

@@ -99,7 +99,7 @@ class Evento(models.Model):
     data = models.DateTimeField('Data/Hora', blank=True, null=False)
     categoria = models.ForeignKey(CategoriaEvento, related_name='Categoria', on_delete=models.RESTRICT)
     pacote_tipo = models.CharField(_('Pacote'), blank=True, null=False, choices=Pacotes)
-    fotografos = models.ManyToManyField(Fotografo)
+    fotografos = models.ManyToManyField(Fotografo, blank=True, null=True)
 
     class Meta:
         verbose_name = _('Evento')

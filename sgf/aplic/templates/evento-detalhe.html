@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">{{evento.valor_foto}}<small class="text-muted fw-light">/Foto</small></h1>
                         {% if user.is_authenticated %}
-                            <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                            <a href="/evento-contrato/{{evento.id}}/pacotefoto" type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</a>
                         {% else %}
                             <a type="button" class="w-100 btn btn-lg btn-outline-dark" href="/users/login">Logar</a>
                         {% endif %}
@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title">{{evento.valor_hora}}<small class="text-muted fw-light">/H</small></h1>
                         {% if user.is_authenticated %}
-                            <button type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</button>
+                            <a href="/evento-contrato/{{evento.id}}/pacotehora" type="button" class="w-100 btn btn-lg btn-outline-dark">Contratar</a>
                         {% else %}
                             <a type="button" class="w-100 btn btn-lg btn-outline-dark" href="/users/login">Logar</a>
                         {% endif %}

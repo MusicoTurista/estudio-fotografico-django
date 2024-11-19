@@ -14,13 +14,12 @@
                         {% for campo in form %}
                             <div class="mb-3">
                                 <label for="{{ campo.id_for_label }}" class="form-label">
-                                    {{ campo.label }} {{campo}}
+                                    {{ campo.label }}: {{campo}}
                                 </label>
                             </div>
                         {% endfor %}
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Fazer login</button>
-                            <!--p><a href="/users/register" class="text-center">Ainda não possui uma conta? Registre-se</a></p-->
 
                         </div>
                     </form>
