@@ -3,11 +3,11 @@ from .models import *
 from .forms import *
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, authenticate, logout
-
+from django.views import View
 from django.contrib import messages
+from django.views.generic import TemplateView
 # Create your views here.
 
-from django.views.generic import TemplateView
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -38,23 +38,29 @@ class EventoDetalheView(TemplateView):
         context['evento'] = CategoriaEvento.objects.filter(id=id).first
         return context
 
-class EventoContratoView(TemplateView):
-    template_name = 'evento-contrato.html'
-    def get_context_data(self, **kwargs):
-        context = super(EventoContratoView, self).get_context_data(**kwargs)
-        id = self.kwargs['id']
-        tipo = self.kwargs['tipo']
-        if tipo == 'pacotefoto' or tipo == 'pacotehora':
-            context['evento'] = CategoriaEvento.objects.filter(id=id).first
-            context['tipo'] = tipo
-            context['form'] = EventRegistrationForm()
-            return context
+def EventoContratoView(request, **kwargs):
+    tipo = kwargs['tipo']
+    evento = CategoriaEvento.objects.filter(id=kwargs['id']).first
+    if request.method == 'POST':
+        form = EventRegistrationForm(request.POST)
+        if request.user.is_authenticated:
+            if form.is_valid(data=request.POST,request=request):
+                date = request.POST['data_evento']
+                hour = request.POST['hora_evento']
 
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        if form.is_valid():
+                current_user = request.user
+                data = f'{date} {hour}'
+                categoria_id = kwargs['id']
+                evento = CategoriaEvento.objects.get(id=categoria_id)
+                pacote_tipo = 'Quantidade de fotos' if tipo == 'pacotefoto' else 'Tempo de serviço'
 
-
+                novo_evento = Evento(cliente=current_user, data=data, categoria=evento, pacote_tipo=pacote_tipo)
+                novo_evento.save()
+                messages.success(request, "Evento requisitado com sucesso!")
+                return redirect(f'/evento-detalhe/{kwargs['id']}')
+    else:
+        form = EventRegistrationForm
+    return render(request, 'evento-contrato.html', {'form': form, 'tipo': tipo, 'evento': evento})
 def RegisterView(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)

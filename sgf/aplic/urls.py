@@ -7,8 +7,8 @@ urlpatterns = [
     path('fotografo', FotografoView.as_view(), name='fotografo'),
     path('evento', EventoView.as_view(), name='evento'),
     path('evento-detalhe/<int:id>/', EventoDetalheView.as_view(), name='evento-detalhe'),
-    path('evento-contrato/<int:id>/<str:tipo>/', EventoContratoView.as_view(), name='evento-contrato'),
 
+    path('evento-contrato/<int:id>/<str:tipo>/', EventoContratoView, name='evento-contrato'),
     path('users/register', RegisterView, name='users/register'),
     path('users/login', LoginView, name='users/login'),
     path('users/logout', LogoutView, name='users/logout'),
