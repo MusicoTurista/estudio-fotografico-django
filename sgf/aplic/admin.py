@@ -20,10 +20,6 @@ class FotografoAdmin(admin.ModelAdmin):
         EquipamentoInLine
     ]
 
-@admin.register(Cliente)
-class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'email')
-
 @admin.register(Equipamento)
 class EquipamentoAdmin(admin.ModelAdmin):
     list_display = ('tipo', 'modelo')
