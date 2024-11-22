@@ -57,7 +57,7 @@ def EventoContratoView(request, **kwargs):
                 novo_evento = Evento(cliente=current_user, data=data, categoria=evento, pacote_tipo=pacote_tipo)
                 novo_evento.save()
                 messages.success(request, "Evento requisitado com sucesso!")
-                return redirect(f'/evento-detalhe/{kwargs['id']}')
+                return redirect(f'/evento-detalhe/{kwargs["id"]}')
     else:
         form = EventRegistrationForm
     return render(request, 'evento-contrato.html', {'form': form, 'tipo': tipo, 'evento': evento})
